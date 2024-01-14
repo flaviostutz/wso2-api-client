@@ -1,6 +1,9 @@
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
   testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
+  coverageReporters: ['text'],
+  collectCoverage: true,
+  collectCoverageFrom: ['./src/**', '!**/__tests__/**'],
   transform: {
     '^.+\\.(tsx?|json?)$': [
       'esbuild-jest',
@@ -9,9 +12,6 @@ module.exports = {
       },
     ],
   },
-  coverageReporters: ['text'],
-  collectCoverage: true,
-  collectCoverageFrom: ['./src/**', '!**/__tests__/**'],
   coverageThreshold: {
     global: {
       lines: 95,
