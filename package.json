@@ -32,6 +32,7 @@
     "@stutzlab/eslint-config": "^3.0.2",
     "@tsconfig/node16": "16.1.1",
     "@types/jest": "^29.5.11",
+    "@types/qs": "^6.9.11",
     "esbuild": "^0.19.11",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.34.0",
