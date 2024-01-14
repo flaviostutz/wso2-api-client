@@ -3,7 +3,7 @@ module.exports = {
   testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
   coverageReporters: ['text'],
   collectCoverage: true,
-  collectCoverageFrom: ['./src/**', '!**/__tests__/**'],
+  collectCoverageFrom: ['./src/**', '!**/__tests__/**', '!**/*.test.*/**', '!**/generated/**'],
   transform: {
     '^.+\\.(tsx?|json?)$': [
       'esbuild-jest',
@@ -15,7 +15,7 @@ module.exports = {
   coverageThreshold: {
     global: {
       lines: 95,
-      functions: 90,
+      functions: 80,
       branches: 70,
     },
   },

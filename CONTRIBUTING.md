@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-Thank you for being interested in helping with Practical CDK Constructs!
+Thank you for being interested in helping with WSO2APIM-SDK!
 
 ## The best way to start
 

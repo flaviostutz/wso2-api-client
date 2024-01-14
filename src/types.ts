@@ -13,14 +13,9 @@ export type WSO2APIMClient = {
 
 export type WSO2APIMConfig = {
   /**
-   * WSO2 API host. E.g.: mywso2.com
+   * WSO2 API base Url. E.g.: https://mywso2.com
    */
-  host: string;
-  /**
-   * WSO2 API port
-   * Defaults to 443
-   */
-  port?: number;
+  baseUrl: string;
   /**
    * WSO2 API username
    */

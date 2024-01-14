@@ -26,7 +26,7 @@ export const registerClient = async (config: WSO2APIMConfig): Promise<ClientCred
   };
 
   const res = axios.post<ClientCredentials>(
-    `https://${config.host}:${config.port}/client-registration/v0.17/register`,
+    `${config.baseUrl}/client-registration/v0.17/register`,
     data,
     axiosConfig,
   );
@@ -61,7 +61,7 @@ export const getBearerToken = async (
   };
 
   const res = axios.post<{ access_token: string }>(
-    `https://${config.host}:${config.port}/oauth2/token`,
+    `${config.baseUrl}/oauth2/token`,
     data,
     axiosConfig,
   );
