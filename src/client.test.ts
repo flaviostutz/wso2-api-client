@@ -32,13 +32,21 @@ describe('client', () => {
     // api mock
     // nock doesn't work with native fetch (which is used by fetch api)
     fetchMock.mockResponseOnce(JSON.stringify({ secret_data: 'abcde', status: 200 }));
+    fetchMock.mockResponseOnce(JSON.stringify({ secret_data: 'abcde', status: 200 }));
 
     const client = await WSO2APIMSDK.create(testConfig);
+    client.publisher.GET('/apis/{apiId}', {
+      params: {
+        path: { apiId: '123-456' },
+        header: {},
+      },
+    });
     const res = await client.devportal.GET('/apis', {
       params: { header: {}, query: { query: 'name' } },
     });
     expect(res).toBeDefined();
-    expect(fetchMock.mock.calls[0][0]).toBe('https://test.com/api/am/store/v1/apis?query=name');
+    expect(fetchMock.mock.calls[0][0]).toBe('https://test.com/api/am/publisher/v1/apis/123-456');
+    expect(fetchMock.mock.calls[1][0]).toBe('https://test.com/api/am/store/v1/apis?query=name');
 
     nClient.done();
     nToken.done();

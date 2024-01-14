@@ -8,5 +8,32 @@ Currently only WSO2APIM v3 is supported.
 
 Some pieces of code and experiences were extracted from [serverless-wso2-apim](https://github.com/ramgrandhi/serverless-wso2-apim). Thanks, Ram!
 
+Check documentation for the calls on type documentation at client.devportal.GET or client.publisher.GET (and other methods).
+
 ## Usage
+
+```
+import { WSO2APIMSDK, WSO2APIMConfig } from 'wso2apim-sdk';
+
+// prepare api client
+const myConfig: WSO2APIMConfig = {
+  baseUrl: 'https://testwso2.com',
+  username: 'user1',
+  password: 'passwd1',
+};
+const client = await WSO2APIMSDK.create(myConfig);
+
+// list all apis in devportal
+const res = await client.devportal.GET('/apis', {
+    params: { header: {}, query: { query: 'name' } },
+});
+
+// get details about api '123-456' in publisher portal
+client.publisher.GET('/apis/{apiId}', {
+    params: {
+        path: { apiId: '123-456' },
+        header: {},
+    },
+});
+```
 
