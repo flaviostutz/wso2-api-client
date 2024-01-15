@@ -9,12 +9,6 @@
     "dist/**/*.d.ts",
     "README.md"
   ],
-  "engines": {
-    "npm": "<0",
-    "node": "=18",
-    "yarn": "<0",
-    "pnpm": "=8.9.0"
-  },
   "packageManager": "pnpm@8.9.0",
   "scripts": {},
   "repository": {
