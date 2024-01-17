@@ -1,9 +1,11 @@
 /* eslint-disable camelcase */
 import nock from 'nock';
 
-import { WSO2APIMSDK, WSO2APIMConfig } from './index';
+import { Wso2ApimConfig } from './types';
 
-const testConfig: WSO2APIMConfig = {
+import { Wso2ApimSdk } from './index';
+
+const testConfig: Wso2ApimConfig = {
   baseUrl: 'https://test.com',
   username: 'user1',
   password: 'passwd1',
@@ -22,7 +24,7 @@ describe('index', () => {
       access_token: '1111-token-2222',
     });
 
-    const cli = await WSO2APIMSDK.create({
+    const cli = await Wso2ApimSdk.createV1({
       baseUrl: 'https://test.com',
       username: 'aaa',
       password: 'bbb',

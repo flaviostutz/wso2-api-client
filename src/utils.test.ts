@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import nock from 'nock';
 
-import { WSO2APIMConfig } from './types';
 import { getBearerToken, registerClient } from './utils';
+import { Wso2ApimConfig } from './types';
 
-const testConfig: WSO2APIMConfig = {
+const testConfig: Wso2ApimConfig = {
   baseUrl: 'https://test.com',
   username: 'user1',
   password: 'passwd1',

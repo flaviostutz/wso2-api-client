@@ -1,18 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import createClient from 'openapi-fetch';
-
-import { paths as pathsPublisher } from './generated/types/publisher';
-import { paths as pathsDevportal } from './generated/types/devportal';
-
-const pubType = createClient<pathsPublisher>();
-const devType = createClient<pathsDevportal>();
-
-export type WSO2APIMClient = {
-  publisher: typeof pubType;
-  devportal: typeof devType;
-};
-
-export type WSO2APIMConfig = {
+export type Wso2ApimConfig = {
   /**
    * WSO2 API base Url. E.g.: https://mywso2.com
    */

@@ -10,10 +10,10 @@ build: install
 	@-find -E ./dist -regex '.*\.test\..*|.*__tests.*' -exec rm -rf {} \;
 
 generate-wso2apim-clients:
-	rm -rf src/generated
+	rm -rf src/v1/generated
 	# nice straightforward usage but more complex types
-	pnpm dlx openapi-typescript@5 docs/publisher-v1.yaml --output src/generated/types/publisher.ts
-	pnpm dlx openapi-typescript@5 docs/devportal-v1.yaml --output src/generated/types/devportal.ts
+	pnpm dlx openapi-typescript@5 docs/publisher-v1.yaml --output src/v1/generated/types/publisher.ts
+	pnpm dlx openapi-typescript@5 docs/devportal-v1.yaml --output src/v1/generated/types/devportal.ts
 
 	# not so straighforward, but simpler types (that are not working with wso2 schema)
 	# pnpm dlx openapi-typescript-codegen -i docs/devportal-v1.yaml -o src/generated/devportal --client axios

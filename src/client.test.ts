@@ -2,13 +2,12 @@
 import nock from 'nock';
 import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 
-import { WSO2APIMConfig } from './types';
-
-import { WSO2APIMSDK } from '.';
+import { Wso2ApimConfig } from './types';
+import { Wso2ApimSdk } from './client';
 
 enableFetchMocks();
 
-const testConfig: WSO2APIMConfig = {
+const testConfig: Wso2ApimConfig = {
   baseUrl: 'https://test.com',
   username: 'user1',
   password: 'passwd1',
@@ -34,7 +33,7 @@ describe('client', () => {
     fetchMock.mockResponseOnce(JSON.stringify({ secret_data: 'abcde', status: 200 }));
     fetchMock.mockResponseOnce(JSON.stringify({ secret_data: 'abcde', status: 200 }));
 
-    const client = await WSO2APIMSDK.create(testConfig);
+    const client = await Wso2ApimSdk.createV1(testConfig);
     client.publisher.GET('/apis/{apiId}', {
       params: {
         path: { apiId: '123-456' },
@@ -65,7 +64,7 @@ describe('client', () => {
     });
 
     const f = async (): Promise<void> => {
-      await WSO2APIMSDK.create({
+      await Wso2ApimSdk.createV1({
         baseUrl: testConfig.baseUrl,
         username: '',
         password: '',
@@ -74,7 +73,7 @@ describe('client', () => {
     await expect(f).rejects.toThrow('username');
 
     const f2 = async (): Promise<void> => {
-      await WSO2APIMSDK.create({
+      await Wso2ApimSdk.createV1({
         baseUrl: testConfig.baseUrl,
         username: 'aaaaa',
         password: '',
@@ -83,7 +82,7 @@ describe('client', () => {
     await expect(f2).rejects.toThrow('password');
 
     const f3 = async (): Promise<void> => {
-      await WSO2APIMSDK.create({
+      await Wso2ApimSdk.createV1({
         baseUrl: '',
         username: 'aaaaa',
         password: 'aaaaa',

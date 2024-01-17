@@ -3,9 +3,9 @@ import https from 'https';
 import qs from 'qs';
 import axios from 'axios';
 
-import { ClientCredentials, WSO2APIMConfig } from './types';
+import { ClientCredentials, Wso2ApimConfig } from './types';
 
-export const registerClient = async (config: WSO2APIMConfig): Promise<ClientCredentials> => {
+export const registerClient = async (config: Wso2ApimConfig): Promise<ClientCredentials> => {
   const data = {
     clientName: config.clientName ?? 'wso2apim-sdk-client',
     owner: config.owner ?? config.username,
@@ -35,7 +35,7 @@ export const registerClient = async (config: WSO2APIMConfig): Promise<ClientCred
 };
 
 export const getBearerToken = async (
-  config: WSO2APIMConfig,
+  config: Wso2ApimConfig,
   clientCredentials: ClientCredentials,
 ): Promise<string> => {
   const data = qs.stringify({
