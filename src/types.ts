@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import createClient from 'openapi-fetch';
 
 import { paths as pathsPublisher } from './generated/types/publisher';
