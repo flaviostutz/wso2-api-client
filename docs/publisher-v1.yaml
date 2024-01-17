@@ -2536,9 +2536,10 @@ paths:
             Successful response if the document name exists.
         400:
           $ref: '#/responses/BadRequest'
-        404: |
-          Not Found.
-          The specified resource does not exist.
+        404:
+          description: |
+            Not Found.
+            The specified resource does not exist.
 
   ######################################################
   # The "specific mediation policy" resource APIs

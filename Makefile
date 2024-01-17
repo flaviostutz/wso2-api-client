@@ -11,8 +11,19 @@ build: install
 
 generate-wso2apim-clients:
 	rm -rf src/generated
-	pnpm dlx openapi-typescript@5.4.1 https://apim.docs.wso2.com/en/3.2.0/develop/product-apis/publisher-apis/publisher-v1/publisher-v1.yaml --output src/generated/types/publisher.ts
-	pnpm dlx openapi-typescript@5.4.1 https://apim.docs.wso2.com/en/3.2.0/develop/product-apis/devportal-apis/devportal-v1/devportal-v1.yaml --output src/generated/types/devportal.ts
+	# nice straightforward usage but more complex types
+	pnpm dlx openapi-typescript@5 docs/publisher-v1.yaml --output src/generated/types/publisher.ts
+	pnpm dlx openapi-typescript@5 docs/devportal-v1.yaml --output src/generated/types/devportal.ts
+
+	# not so straighforward, but simpler types (that are not working with wso2 schema)
+	# pnpm dlx openapi-typescript-codegen -i docs/devportal-v1.yaml -o src/generated/devportal --client axios
+	# pnpm dlx openapi-typescript-codegen -i docs/publisher-v1.yaml -o src/generated/publisher --client axios
+
+	# pnpm dlx swagger-typescript-api -p docs/devportal-v1.json -o src/generated/devportal -n myApi.ts
+
+	# not working with pnpm
+	# pnpm dlx @openapitools/openapi-generator-cli generate -i docs/devportal-v1.yaml -o src/generated/devportal
+	# pnpm dlx @openapitools/openapi-generator-cli generate -i docs/publisher-v1.yaml -o src/generated/publisher
 
 lint:
 	pnpm exec eslint ./src --ext .ts
