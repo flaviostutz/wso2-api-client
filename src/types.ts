@@ -13,17 +13,17 @@ export type Wso2ApimConfig = {
   password: string;
   /**
    * WSO2 client name registered before API calls
-   * Defaults to 'wso2apim-sdk-client'
+   * @default 'wso2apim-sdk-client'
    */
   clientName?: string;
   /**
    * WSO2 owner identification
-   * Defaults to [username]
+   * @default username
    */
   owner?: string;
   /**
    * Accepts unverified hosts during TLS handshake
-   * Defaults to false
+   * @default false
    */
   tlsRejectUnauthorized?: boolean;
 };
