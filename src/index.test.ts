@@ -24,11 +24,20 @@ describe('index', () => {
       access_token: '1111-token-2222',
     });
 
+    // mock server check
+    const scopev = nock(`${testConfig.baseUrl}`)
+      .get('/services/Version')
+      .reply(
+        200,
+        '<ns:getVersionResponse xmlns:ns="http://version.services.core.carbon.wso2.org"><return>WSO2 API Manager-3.2.0</return></ns:getVersionResponse>',
+      );
+
     const cli = await Wso2ApimSdk.createV1({
       baseUrl: 'https://test.com',
       username: 'aaa',
       password: 'bbb',
     });
     expect(cli.devportal).toBeDefined();
+    scopev.done();
   });
 });

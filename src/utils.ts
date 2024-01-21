@@ -50,19 +50,13 @@ export const getBearerToken = async (
     `${clientCredentials.clientId}:${clientCredentials.clientSecret}`,
   ).toString('base64');
 
-  let tlsRejectUnauthorized = true;
-  if (typeof config.tlsRejectUnauthorized !== 'undefined') {
-    // eslint-disable-next-line prefer-destructuring
-    tlsRejectUnauthorized = config.tlsRejectUnauthorized;
-  }
-
   const axiosConfig = {
     headers: {
       Authorization: `Basic ${authTokenBase64}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     httpsAgent: new https.Agent({
-      rejectUnauthorized: tlsRejectUnauthorized,
+      rejectUnauthorized: config.tlsRejectUnauthorized,
     }),
   };
 
@@ -73,4 +67,27 @@ export const getBearerToken = async (
   );
 
   return (await res).data.access_token;
+};
+
+export const checkWso2ServerVersion = async (
+  config: Wso2ApimConfig,
+  wso2ApiVersion: 'v1',
+): Promise<void> => {
+  let info = '';
+  try {
+    const res = axios.get<string>(`${config.baseUrl}/services/Version`, {
+      httpsAgent: new https.Agent({ rejectUnauthorized: config.tlsRejectUnauthorized }),
+    });
+    const responseBody = (await res).data;
+    info = responseBody.replaceAll(/<[^>]+>/g, '');
+  } catch (err) {
+    throw new Error(`Couldn't check server version. err=${err}`);
+  }
+  if (wso2ApiVersion === 'v1') {
+    if (info.indexOf('WSO2 API Manager-3') === -1) {
+      throw new Error(`Client for API v1 requires WSO2 server 3.x. Found '${info}'`);
+    }
+    return;
+  }
+  throw new Error(`'wso2Api' version is not supported`);
 };
