@@ -8,6 +8,7 @@ const testConfig: Wso2ApimConfig = {
   baseUrl: 'https://test.com',
   username: 'user1',
   password: 'passwd1',
+  tlsRejectUnauthorized: false,
 };
 
 describe('utils', () => {
