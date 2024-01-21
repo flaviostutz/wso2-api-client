@@ -50,13 +50,19 @@ export const getBearerToken = async (
     `${clientCredentials.clientId}:${clientCredentials.clientSecret}`,
   ).toString('base64');
 
+  let tlsRejectUnauthorized = true;
+  if (typeof config.tlsRejectUnauthorized !== 'undefined') {
+    // eslint-disable-next-line prefer-destructuring
+    tlsRejectUnauthorized = config.tlsRejectUnauthorized;
+  }
+
   const axiosConfig = {
     headers: {
       Authorization: `Basic ${authTokenBase64}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     httpsAgent: new https.Agent({
-      rejectUnauthorized: config.tlsRejectUnauthorized,
+      rejectUnauthorized: tlsRejectUnauthorized,
     }),
   };
 

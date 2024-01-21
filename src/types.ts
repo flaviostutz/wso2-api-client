@@ -23,7 +23,7 @@ export type Wso2ApimConfig = {
   owner?: string;
   /**
    * Accepts unverified hosts during TLS handshake
-   * @default false
+   * @default true
    */
   tlsRejectUnauthorized?: boolean;
 };
