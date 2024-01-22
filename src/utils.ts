@@ -71,7 +71,7 @@ export const getBearerToken = async (
 
 export const checkWso2ServerVersion = async (
   config: Wso2ApimConfig,
-  wso2ApiVersion: 'v1',
+  wso2ApiVersion: string,
 ): Promise<void> => {
   let info = '';
   try {
@@ -86,6 +86,12 @@ export const checkWso2ServerVersion = async (
   if (wso2ApiVersion === 'v1') {
     if (info.indexOf('WSO2 API Manager-3') === -1) {
       throw new Error(`Client for API v1 requires WSO2 server 3.x. Found '${info}'`);
+    }
+    return;
+  }
+  if (wso2ApiVersion === 'v2') {
+    if (info.indexOf('WSO2 API Manager-4') === -1) {
+      throw new Error(`Client for API v2 requires WSO2 server 4.x. Found '${info}'`);
     }
     return;
   }

@@ -60,7 +60,7 @@ describe('utils', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
-  it('check WSO2 server version should pass if OK', async () => {
+  it('check WSO2 server version should pass if OK v1', async () => {
     const scope = nock(`${testConfig.baseUrl}`)
       .get('/services/Version')
       .reply(
@@ -69,6 +69,20 @@ describe('utils', () => {
       );
     const f = async (): Promise<void> => {
       await checkWso2ServerVersion(testConfig, 'v1');
+    };
+    await f();
+    scope.done();
+  });
+
+  it('check WSO2 server version should pass if OK v2', async () => {
+    const scope = nock(`${testConfig.baseUrl}`)
+      .get('/services/Version')
+      .reply(
+        200,
+        '<ns:getVersionResponse xmlns:ns="http://version.services.core.carbon.wso2.org"><return>WSO2 API Manager-4.0.0</return></ns:getVersionResponse>',
+      );
+    const f = async (): Promise<void> => {
+      await checkWso2ServerVersion(testConfig, 'v2');
     };
     await f();
     scope.done();
